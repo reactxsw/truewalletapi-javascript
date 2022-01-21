@@ -6,8 +6,11 @@
 Redeem a truewallet voucher to a phone number 
 check for valid phone number and valid url
 raise error for invalid input
+Phone number ex. 061XXXXXXX 
+Voucher link ex. https://gift.truemoney.com/campaign/?v=XXXXXXXXXXXXXXXXXX
+(V= {18 char})
 */
-async function Redeem(phone , url) {
+module.exports = async (phone , url) => {
     if ((phone.trim().length == 10) && phone.trim()[0] == "0") {
         PHONE_NUMBER = phone
     } else {
@@ -28,15 +31,4 @@ async function Redeem(phone , url) {
             };
         }
     throw Error(request.status.code)
-}
-/*
-Phone number ex. 061XXXXXXX 
-Voucher link ex. https://gift.truemoney.com/campaign/?v=XXXXXXXXXXXXXXXXXX
-(V= {18 char})
-*/ 
-response = Redeem("061XXX" , "https://gift.truemoney.com/campaign/?v=BgOnsnox4d85q1oBbj").then(value => {
-    console.log(value.AMOUNT);
-    console.log(value.SENDER);
-  }).catch(error => {
-    console.error(error)
-})
+};
